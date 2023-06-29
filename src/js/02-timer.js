@@ -8,12 +8,13 @@ const daysEl = document.querySelector('[data-days]');
 const hoursEl = document.querySelector('[data-hours]');
 const minsEl = document.querySelector('[data-minutes]');
 const secsEl = document.querySelector('[data-seconds]');
+const spanEls = document.querySelectorAll('.value');
 
 let timerEl = null;
 
 btnEl.disabled = true;
 
-flatpickr(dateEL, {
+flatpickr(dateEl, {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
@@ -21,9 +22,9 @@ flatpickr(dateEL, {
   onClose(selectedDates) {
     if (selectedDates[0] <= Date.now()) {
       Notiflix.Notify.failure('Please choose a date in the future!');
-      btn.disabled = true;
+      btnEl.disabled = true;
     } else {
-      btn.disabled = false;
+      btnEl.disabled = false;
       Notiflix.Notify.success('Start your countdown!');
     }
   },
@@ -32,10 +33,11 @@ flatpickr(dateEL, {
 btnEl.addEventListener('click', onClick);
 
 function onClick() {
+  spanEls.forEach(item => item.classList.toggle('end'));
   btnEl.disabled = true;
   dateEl.disabled = true;
-  timerEL = setInterval(() => {
-    const datePicked = new Date(date.value);
+  timerEl = setInterval(() => {
+    const datePicked = new Date(dateEl.value);
     const timeLeft = datePicked - Date.now();
     const { days, hours, minutes, seconds } = convertMs(timeLeft);
 
@@ -43,6 +45,11 @@ function onClick() {
     hoursEl.textContent = addLeadingZero(hours);
     minsEl.textContent = addLeadingZero(minutes);
     secsEl.textContent = addLeadingZero(seconds);
+    if (timeLeft < 1000) {
+      spanEls.forEach(item => item.classList.toggle('end'));
+      clearInterval(timerId);
+      dateEl.disabled = false;
+    }
   }, 1000);
 }
 function convertMs(ms) {
