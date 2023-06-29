@@ -44,7 +44,7 @@ function onClick() {
     minsEl.textContent = addLeadingZero(minutes);
     secsEl.textContent = addLeadingZero(seconds);
     if (timeLeft < 1000) {
-      
+      spanEls.forEach(elem => elem.classList.toggle('end'));
       clearInterval(timerEl);
       dateEl.disabled = false;
     }
