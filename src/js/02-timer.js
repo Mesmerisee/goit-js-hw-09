@@ -33,7 +33,6 @@ flatpickr(dateEl, {
 btnEl.addEventListener('click', onClick);
 
 function onClick() {
-  spanEls.forEach(item => item.classList.toggle('end'));
   btnEl.disabled = true;
   dateEl.disabled = true;
   timerEl = setInterval(() => {
