@@ -47,7 +47,7 @@ function onClick() {
     secsEl.textContent = addLeadingZero(seconds);
     if (timeLeft < 1000) {
       spanEls.forEach(item => item.classList.toggle('end'));
-      clearInterval(timerId);
+      clearInterval(timerEl);
       dateEl.disabled = false;
     }
   }, 1000);
