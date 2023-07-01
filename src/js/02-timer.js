@@ -8,6 +8,7 @@ const daysEl = document.querySelector('[data-days]');
 const hoursEl = document.querySelector('[data-hours]');
 const minsEl = document.querySelector('[data-minutes]');
 const secsEl = document.querySelector('[data-seconds]');
+const spanEls = document.querySelectorAll('.value');
 
 let timerEl = null;
 
